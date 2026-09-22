@@ -1,0 +1,87 @@
+classDiagram
+    direction TB
+
+    class PizzaIngredientFactory {
+        <<interface>>
+        +createDough() Dough
+        +createSauce() Sauce
+        +createCheese() Cheese
+    }
+
+    class NYIngredientFactory {
+        +createDough() Dough
+        +createSauce() Sauce
+        +createCheese() Cheese
+    }
+
+    class ChicagoIngredientFactory {
+        +createDough() Dough
+        +createSauce() Sauce
+        +createCheese() Cheese
+    }
+
+    class Dough {
+        <<interface>>
+        +getType() String
+    }
+
+    class Sauce {
+        <<interface>>
+        +getType() String
+    }
+
+    class Cheese {
+        <<interface>>
+        +getType() String
+    }
+
+    class ThinCrustDough {
+        +getType() String
+    }
+
+    class ThickCrustDough {
+        +getType() String
+    }
+
+    class MarinaraSauce {
+        +getType() String
+    }
+
+    class PlumTomatoSauce {
+        +getType() String
+    }
+
+    class ReggianoCheese {
+        +getType() String
+    }
+
+    class MozzarellaCheese {
+        +getType() String
+    }
+
+    class Pizza {
+        -name String
+        -ingredientFactory PizzaIngredientFactory
+        +prepare() void
+        +cook() void
+        +dress() void
+    }
+
+    PizzaIngredientFactory <|.. NYIngredientFactory      : implements
+    PizzaIngredientFactory <|.. ChicagoIngredientFactory : implements
+
+    Dough  <|.. ThinCrustDough    : implements
+    Dough  <|.. ThickCrustDough   : implements
+    Sauce  <|.. MarinaraSauce     : implements
+    Sauce  <|.. PlumTomatoSauce   : implements
+    Cheese <|.. ReggianoCheese    : implements
+    Cheese <|.. MozzarellaCheese  : implements
+
+    NYIngredientFactory      ..> ThinCrustDough   : creates
+    NYIngredientFactory      ..> MarinaraSauce    : creates
+    NYIngredientFactory      ..> ReggianoCheese   : creates
+    ChicagoIngredientFactory ..> ThickCrustDough  : creates
+    ChicagoIngredientFactory ..> PlumTomatoSauce  : creates
+    ChicagoIngredientFactory ..> MozzarellaCheese : creates
+
+    Pizza o-- PizzaIngredientFactory : has

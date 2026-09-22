@@ -1,0 +1,43 @@
+classDiagram
+    direction TB
+
+    class Pizza {
+        <<interface>>
+        +prepare() void
+        +cook() void
+        +dress() void
+    }
+
+    class CheesePizza {
+        +prepare() void
+        +cook() void
+        +dress() void
+    }
+
+    class VeggiePizza {
+        +prepare() void
+        +cook() void
+        +dress() void
+    }
+
+    class PizzaShop {
+        <<abstract>>
+        +orderPizza() void
+        #createPizza() Pizza*
+    }
+
+    class CheesePizzaShop {
+        #createPizza() Pizza
+    }
+
+    class VeggiePizzaShop {
+        #createPizza() Pizza
+    }
+
+    Pizza <|.. CheesePizza         : implements
+    Pizza <|.. VeggiePizza         : implements
+    PizzaShop <|-- CheesePizzaShop : extends
+    PizzaShop <|-- VeggiePizzaShop : extends
+    CheesePizzaShop ..> CheesePizza : creates
+    VeggiePizzaShop ..> VeggiePizza : creates
+    PizzaShop ..> Pizza             : uses
