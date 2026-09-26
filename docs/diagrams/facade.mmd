@@ -1,0 +1,52 @@
+classDiagram
+    class HomeTheaterFacade {
+        -Amplifier amp
+        -DvdPlayer dvd
+        -Projector projector
+        -TheaterLights lights
+        -Screen screen
+        +watchMovie(String movie)
+        +endMovie()
+    }
+
+    class Amplifier {
+        -String name
+        +on()
+        +off()
+        +setVolume(int vol)
+    }
+
+    class DvdPlayer {
+        -String name
+        +on()
+        +off()
+        +play(String movie)
+        +stop()
+        +eject()
+    }
+
+    class Projector {
+        -String name
+        +on()
+        +off()
+        +wideScreenMode()
+    }
+
+    class TheaterLights {
+        -String name
+        +on()
+        +off()
+        +dim(int percent)
+    }
+
+    class Screen {
+        -String name
+        +down()
+        +up()
+    }
+
+    HomeTheaterFacade --> Amplifier
+    HomeTheaterFacade --> DvdPlayer
+    HomeTheaterFacade --> Projector
+    HomeTheaterFacade --> TheaterLights
+    HomeTheaterFacade --> Screen

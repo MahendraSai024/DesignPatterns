@@ -1,0 +1,39 @@
+classDiagram
+    class MediaPlayer {
+        <<interface>>
+        +play(String fileName)
+    }
+
+    class AdvancedMediaPlayer {
+        <<interface>>
+        +playMp4(String fileName)
+        +playVlc(String fileName)
+    }
+
+    class Mp4Player {
+        +playMp4(String fileName)
+        +playVlc(String fileName)
+    }
+
+    class VlcPlayer {
+        +playVlc(String fileName)
+        +playMp4(String fileName)
+    }
+
+    class MediaAdapter {
+        -AdvancedMediaPlayer advancedPlayer
+        -String format
+        +MediaAdapter(String format)
+        +play(String fileName)
+    }
+
+    class AudioPlayer {
+        +play(String fileName)
+    }
+
+    AdvancedMediaPlayer <|.. Mp4Player : implements
+    AdvancedMediaPlayer <|.. VlcPlayer : implements
+    MediaPlayer <|.. MediaAdapter : implements
+    MediaPlayer <|.. AudioPlayer : implements
+    MediaAdapter o-- AdvancedMediaPlayer : wraps
+    AudioPlayer ..> MediaAdapter : creates

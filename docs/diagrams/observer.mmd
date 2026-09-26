@@ -1,0 +1,47 @@
+classDiagram
+    class Subject {
+        <<interface>>
+        +registerObserver(Observer o)
+        +removeObserver(Observer o)
+        +notifyObservers()
+    }
+
+    class Observer {
+        <<interface>>
+        +update(float temperature, float humidity, float pressure)
+    }
+
+    class WeatherStation {
+        -List~Observer~ observers
+        -float temperature
+        -float humidity
+        -float pressure
+        +registerObserver(Observer o)
+        +removeObserver(Observer o)
+        +notifyObservers()
+        +setMeasurements(float temperature, float humidity, float pressure)
+    }
+
+    class CurrentConditionsDisplay {
+        -String name
+        +update(float temperature, float humidity, float pressure)
+    }
+
+    class StatisticsDisplay {
+        -float minTemp
+        -float maxTemp
+        -float sumTemp
+        -int count
+        +update(float temperature, float humidity, float pressure)
+    }
+
+    class ForecastDisplay {
+        -float lastPressure
+        +update(float temperature, float humidity, float pressure)
+    }
+
+    Subject <|.. WeatherStation : implements
+    Observer <|.. CurrentConditionsDisplay : implements
+    Observer <|.. StatisticsDisplay : implements
+    Observer <|.. ForecastDisplay : implements
+    WeatherStation --> Observer : notifies

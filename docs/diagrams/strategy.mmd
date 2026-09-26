@@ -1,0 +1,29 @@
+classDiagram
+    class SortStrategy {
+        <<interface>>
+        +sort(int[] data)
+    }
+
+    class BubbleSortStrategy {
+        +sort(int[] data)
+    }
+
+    class QuickSortStrategy {
+        +sort(int[] data)
+    }
+
+    class MergeSortStrategy {
+        +sort(int[] data)
+    }
+
+    class DataSorter {
+        -SortStrategy strategy
+        +DataSorter(SortStrategy strategy)
+        +setStrategy(SortStrategy strategy)
+        +sort(int[] data)
+    }
+
+    SortStrategy <|.. BubbleSortStrategy : implements
+    SortStrategy <|.. QuickSortStrategy : implements
+    SortStrategy <|.. MergeSortStrategy : implements
+    DataSorter --> SortStrategy : delegates to

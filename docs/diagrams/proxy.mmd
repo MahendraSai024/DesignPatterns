@@ -1,0 +1,23 @@
+classDiagram
+    class Image {
+        <<interface>>
+        +display()
+    }
+
+    class RealImage {
+        -String fileName
+        +RealImage(String fileName)
+        -loadFromDisk()
+        +display()
+    }
+
+    class ProxyImage {
+        -String fileName
+        -RealImage realImage
+        +ProxyImage(String fileName)
+        +display()
+    }
+
+    Image <|.. RealImage : implements
+    Image <|.. ProxyImage : implements
+    ProxyImage --> RealImage : creates lazily

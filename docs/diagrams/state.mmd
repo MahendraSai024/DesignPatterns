@@ -1,0 +1,54 @@
+classDiagram
+    class State {
+        <<interface>>
+        +insertCoin()
+        +selectProduct()
+        +dispense()
+        +refund()
+    }
+
+    class VendingMachine {
+        -State currentState
+        -int itemCount
+        +insertCoin()
+        +selectProduct()
+        +dispense()
+        +refund()
+        +setState(State s)
+        +getItemCount() int
+        +decrementItems()
+    }
+
+    class IdleState {
+        +insertCoin()
+        +selectProduct()
+        +dispense()
+        +refund()
+    }
+
+    class HasCoinState {
+        +insertCoin()
+        +selectProduct()
+        +dispense()
+        +refund()
+    }
+
+    class DispensingState {
+        +insertCoin()
+        +selectProduct()
+        +dispense()
+        +refund()
+    }
+
+    class OutOfStockState {
+        +insertCoin()
+        +selectProduct()
+        +dispense()
+        +refund()
+    }
+
+    State <|.. IdleState : implements
+    State <|.. HasCoinState : implements
+    State <|.. DispensingState : implements
+    State <|.. OutOfStockState : implements
+    VendingMachine --> State : delegates to

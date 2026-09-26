@@ -1,0 +1,38 @@
+classDiagram
+    class SupportHandler {
+        <<abstract>>
+        #SupportHandler next
+        +setNext(SupportHandler next) SupportHandler
+        +handle(SupportRequest request)*
+        #passToNext(SupportRequest request)
+    }
+
+    class FrontlineSupport {
+        +handle(SupportRequest request)
+    }
+
+    class TechnicalSupport {
+        +handle(SupportRequest request)
+    }
+
+    class SeniorEngineer {
+        +handle(SupportRequest request)
+    }
+
+    class ManagementEscalation {
+        +handle(SupportRequest request)
+    }
+
+    class SupportRequest {
+        -String description
+        -SupportLevel level
+        +getDescription() String
+        +getLevel() SupportLevel
+    }
+
+    SupportHandler <|-- FrontlineSupport : extends
+    SupportHandler <|-- TechnicalSupport : extends
+    SupportHandler <|-- SeniorEngineer : extends
+    SupportHandler <|-- ManagementEscalation : extends
+    SupportHandler --> SupportHandler : next
+    SupportHandler --> SupportRequest : handles

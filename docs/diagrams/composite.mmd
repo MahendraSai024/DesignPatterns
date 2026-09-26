@@ -1,0 +1,29 @@
+classDiagram
+    class FileSystemItem {
+        <<abstract>>
+        #String name
+        #FileSystemItem(String name)
+        +getName() String
+        +getSize()* int
+        +print(String indent)*
+    }
+
+    class File {
+        -int size
+        +File(String name, int size)
+        +getSize() int
+        +print(String indent)
+    }
+
+    class Folder {
+        #List~FileSystemItem~ children
+        +Folder(String name)
+        +add(FileSystemItem item)
+        +remove(FileSystemItem item)
+        +getSize() int
+        +print(String indent)
+    }
+
+    FileSystemItem <|-- File : extends
+    FileSystemItem <|-- Folder : extends
+    Folder o-- FileSystemItem : contains
